@@ -28,12 +28,40 @@
 - Run `export $(cat .env | xargs)` and then, run `mvn spring-boot:run`.
 - Optionally, you can run `SPRING_DATABASE_URL=url other-secrets mvn spring:boot run`.
 - If you fill the credentials which work, your app should start successfully.
-- The connection is tested with AWS RDS so, you can use it confidently. 
+- The connection is tested with AWS RDS so, you can use it confidently.
 
+### How to Run Tests?
+- mvn test
 
 ### Docker commands
 - `docker build -t dolap .`
 - `docker run -p 8080:8080 -e SPRING_DATASOURCE_URL=jdbc:postgresql://AWS-RDS-URL:5432/postgres -e SPRING_DATASOURCE_USERNAME=postgres -e SPRING_DATASOURCE_PASSWORD=password dolap`
 - Note: We'll pass secrets in CI when we deploy, see above.
+
+### Endpoints:
+
+#### Health
+- /health - Health Check API for AWS ALB see CDK Stack for detailed info.
+
+#### Auth
+- /auth/signup - POST - Sign Up
+- /auth/login - POST - Sign In / Login
+
+#### Categories
+- Requests below require Authorization Header: Bearer JWT 
+- /categories - GET - Lists categories
+- /categories - POST - Add new category with given name
+- /categories/id - GET - Finds category for given id.
+- /categories/id - PUT - Updates category for given id.
+- /categories/id - DELETE - Deletes category for given id.
+- /categories/id/products - Lists products for given category id.
+
+#### Products
+- Requests below require Authorization Header: Bearer JWT
+- /products - POST - Add new product with given name, price, category_id
+- /products/id - GET - Finds product for given id.
+- /products/id - PUT - Updates product for given id.
+- /products/id - DELETE - Deletes product for given id.
+
 
 ### Feel free to reach out to me or open an issue if you have any question or suggestion.
