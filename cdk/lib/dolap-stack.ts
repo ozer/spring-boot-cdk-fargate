@@ -64,8 +64,8 @@ export class DolapStack extends Stack {
                 environment: {
                     // GitHub Actions will get these from Secrets settings of the repository.
                     SPRING_DATASOURCE_URL: process.env?.SPRING_DATASOURCE_URL || ":(",
-                    SPRING_DATABASE_USERNAME: process.env?.SPRING_DATASOURCE_USERNAME || ":(",
-                    SPRING_DATABASE_PASSWORD: process.env?.SPRING_DATASOURCE_PASSWORD || ":("
+                    SPRING_DATASOURCE_USERNAME: process.env?.SPRING_DATASOURCE_USERNAME || ":(",
+                    SPRING_DATASOURCE_PASSWORD: process.env?.SPRING_DATASOURCE_PASSWORD || ":("
                 },
                 cpu: 1024,
                 memoryLimitMiB: 2048,
@@ -78,9 +78,9 @@ export class DolapStack extends Stack {
 
         // Fargate Service - We want only one task to be deployed as we want things to be simple.
         // @ts-ignore
-        const dolapAPIService = new FargateService(this, "CSGraphQLAPIService", {
+        const dolapAPIService = new FargateService(this, "dolap-api-service", {
             cluster,
-            serviceName: "DolapAPIService",
+            serviceName: "DolapAPIFargateService",
             taskDefinition: dolapAPITaskDefinition,
             desiredCount: 1,
             assignPublicIp: true,
