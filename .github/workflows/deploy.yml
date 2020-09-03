@@ -40,6 +40,5 @@ jobs:
         run: |
           cd cdk
           yarn install
-          yarn typecheck
           yarn build
           yarn deploy
