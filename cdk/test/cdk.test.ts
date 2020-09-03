@@ -7,7 +7,4 @@ test('VPC Created', () => {
     // WHEN
     const stack = new Cdk.DolapStack(app, 'MyTestStack');
     // THEN
-    expectCDK(stack).to(haveResource("AWS::VPC",{
-        VisibilityTimeout: 300
-    }));
 });

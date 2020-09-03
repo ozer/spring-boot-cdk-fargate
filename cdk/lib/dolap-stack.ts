@@ -108,7 +108,7 @@ export class DolapStack extends Stack {
                 },
                 targets: [
                     dolapAPIService.loadBalancerTarget({
-                        containerName: 'DolapAPIContainer',
+                        containerName: 'dolap-api-container',
                         containerPort: 8080,
                     }),
                 ],
